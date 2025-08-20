@@ -70,3 +70,8 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+# For Capistrano + Net::SSH ed25519 key support
+gem 'ed25519', '~> 1.2'
+gem 'bcrypt_pbkdf', '~> 1.0'
+
