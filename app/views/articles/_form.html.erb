@@ -22,6 +22,16 @@
   </div>
 
   <div>
+    <%= form.label :image, style: "display: block" %>
+    <%= form.file_field :image %>
+  </div>
+
+  <div>
+    <%= form.label :article_doc, style: "display: block" %>
+    <%= form.file_field :article_doc %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

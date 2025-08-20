@@ -75,3 +75,8 @@ end
 gem 'ed25519', '~> 1.2'
 gem 'bcrypt_pbkdf', '~> 1.0'
 
+# For image and PDF previews
+gem 'image_processing', '~> 1.2'
+
+gem "aws-sdk-s3", require: false
+

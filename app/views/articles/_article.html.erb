@@ -9,4 +9,22 @@
     <%= article.content %>
   </p>
 
+  <p>
+    <strong>Image:</strong>
+    <% if article.image.attached? %>
+      <%= image_tag article.image.variant(resize_to_limit: [150,150]) %>
+    <% else %>
+      No Image Attached
+    <% end %>
+  </p>
+
+  <p>
+    <strong>Article Doc:</strong>
+    <% if article.article_doc.attached? %>
+      <%= link_to "Download", rails_blob_path(article.article_doc, disposition: 'attachment') %>
+    <% else %>
+      No Document Attached
+    <% end %>
+  </p>
+
 </div>
