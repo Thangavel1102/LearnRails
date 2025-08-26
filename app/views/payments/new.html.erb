@@ -1,0 +1,39 @@
+<h2>Stripe Payment</h2>
+
+<%= form_tag payments_path, method: :post do %>
+  <div>
+    <label>Enter amount (USD):</label>
+    <input type="number" id="custom-amount" name="amount" min="1" required>
+  </div>
+
+  <script src="https://checkout.stripe.com/checkout.js"></script>
+  <button id="customButton">Pay with Card</button>
+
+  <script>
+    var handler = StripeCheckout.configure({
+      key: "<%= Rails.application.credentials.dig(:stripe, :publishable_key) %>",
+      locale: "auto",
+      token: function(token) {
+        // Append token + amount to the form and submit
+        var form = document.forms[0];
+        var hiddenInput = document.createElement("input");
+        hiddenInput.setAttribute("type", "hidden");
+        hiddenInput.setAttribute("name", "stripeToken");
+        hiddenInput.setAttribute("value", token.id);
+        form.appendChild(hiddenInput);
+
+        form.submit();
+      }
+    });
+
+    document.getElementById("customButton").addEventListener("click", function(e) {
+      e.preventDefault();
+      var amount = document.getElementById("custom-amount").value * 100; // cents
+      handler.open({
+        name: "Article Purchase",
+        description: "Custom Amount",
+        amount: amount
+      });
+    });
+  </script>
+<% end %>
